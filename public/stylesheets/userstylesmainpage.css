@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.bus-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.bus-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.2s;
+}
+
+.bus-card:hover {
+    transform: scale(1.05);
+}
+
+.bus-name {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.bus-details {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #666;
+}
+
+.bus-details span {
+    color: #333;
+    font-weight: bold;
+}

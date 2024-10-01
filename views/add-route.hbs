@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+    <link rel="stylesheet" href="/stylesheets/table.css">
+    <link rel="stylesheet" href="/stylesheets/deletebutton.css">
+     
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-thin-straight/css/uicons-thin-straight.css'>
+
+    <title>Add Route</title>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .form-group .stop-input {
+            margin-bottom: 10px;
+        }
+
+        .add-route-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add New Route</h2>
+        <form id="addRouteForm" action="/api/add-route" method="POST">
+            <div class="form-group">
+                <label for="boardingPoint">Boarding Point</label>
+                <input type="text" id="boardingPoint" name="boardingPoint" required>
+            </div>
+            <div class="form-group">
+                <label for="destinationPoint">Destination Point</label>
+                <input type="text" id="destinationPoint" name="destinationPoint" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="numberOfStops">Number of Stops</label>
+                <select id="numberOfStops" name="numberOfStops" required>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div id="stopsContainer"></div>
+            
+            <button type="submit" class="add-route-button">Add Route</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('numberOfStops').addEventListener('change', function() {
+            var stopsContainer = document.getElementById('stopsContainer');
+            stopsContainer.innerHTML = '';
+            var numberOfStops = parseInt(this.value);
+
+            for (var i = 1; i <= numberOfStops; i++) {
+                var stopDiv = document.createElement('div');
+                stopDiv.className = 'form-group stop-input';
+                var label = document.createElement('label');
+                label.textContent = 'Stop ' + i;
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.name = 'stops[]'; // Use same name for all stops
+                input.required = true;
+                stopDiv.appendChild(label);
+                stopDiv.appendChild(input);
+                stopsContainer.appendChild(stopDiv);
+            }
+        });
+
+        document.getElementById('addRouteForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission for now
+
+            // Collect form data
+            var formData = new FormData(this);
+            var stops = [];
+
+            // Extract stops from formData
+            formData.getAll('stops[]').forEach(function(stop) {
+                stops.push(stop);
+            });
+
+            // Add boarding point to the beginning and destination point to the end of stops
+            stops.unshift(formData.get('boardingPoint'));
+            stops.push(formData.get('destinationPoint'));
+
+            // Prepare data object
+            var routeData = {
+                boardingPoint: formData.get('boardingPoint'),
+                destinationPoint: formData.get('destinationPoint'),
+                numberOfStops: formData.get('numberOfStops'),
+                stops: stops, // Array of stops
+                totalFare: formData.get('totalFare')
+            };
+
+            console.log(routeData); // Display collected data (for testing)
+
+            // Example of sending routeData to server-side endpoint (replace with your actual endpoint)
+            fetch('/admin/add-route', {
+                method: 'POST',
+                body: JSON.stringify(routeData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success response
+                alert('Route added successfully!');
+                window.location.href = '/admin/routes'; // Redirect to routes page
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error
+                alert('An error occurred. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

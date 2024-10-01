@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll Bus</title>
+    <link rel="stylesheet" href="path/to/your/styles.css"> <!-- Optional: link to your CSS file -->
+</head>
+<body>
+    <h1>Enroll Bus</h1>
+    <form action="/admin/enroll-bus" method="POST">
+        
+        <div>
+            <label for="boarding-date">Boarding Date:</label>
+            <input type="date" id="boarding-date" name="boarding_date" required>
+        </div>
+        <div>
+            <label for="ending-date">Ending Date:</label>
+            <input type="date" id="ending-date" name="ending_date" required>
+        </div>
+        <div class="form-group">
+                <label for="totalFare">Total Fare</label>
+                <input type="number" id="totalFare" name="totalFare" required>
+            </div>
+        <div>
+            <button type="submit" class="assign-button">Assign</button>
+        </div>
+    </form>
+</body>
+</html>

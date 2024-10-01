@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/stylesheets/AdminLogin.css">
+  
+</head>
+<body>
+  <div class="animated bounceInDown">
+    <div class="container">
+      <span class="error animated tada" id="msg"></span>
+      <form action="/admin/login" method="POST" name="form1" class="box">
+        <h4>Admin<span>Dashboard</span></h4>
+        <h5>Sign in to your account.</h5>
+        <input type="text" name="email" placeholder="Email" autocomplete="off" value="admin@gmail.com">
+        <i class="typcn typcn-eye"><img id="eye" src="./data/eye.png" alt=""></i>
+        <input type="password" name="password" placeholder="Passsword" id="pwd" autocomplete="off" value="admin">
+        <a href="forgotpass.html" class="forgetpass">Forget Password?</a>
+        <input id="submit" type="submit" value="Sign in" class="btn1">
+      </form>
+    </div>
+  </div>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+</body>
+</html>
+<script src="./js/AdminLogin.js"></script>
+<script src="./js/firebase_config.js"></script>

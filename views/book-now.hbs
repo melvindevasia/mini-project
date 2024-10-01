@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #00457c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #00457c;
+        }
+        .stops-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .stops-list li {
+            background: #e0f7fa;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #00457c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #003366;
+        }
+        .fare {
+            font-weight: bold;
+            color: #00457c;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Book Your Seat</h1>
+    </header>
+
+    <div class="container">
+        <!-- Section to show all available stops -->
+        <div class="available-stops">
+            <h2>Available Stops</h2>
+            <ul class="stops-list">
+                {{#each stops_available}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        
+        <form action="/users/know-price" method="post">
+            {{#each seats}}
+                <div class="form-group">
+                    <label for="seat{{@index}}">Seat Number: {{seat_no}}</label>
+                    <input type="hidden" name="seat_no" value="{{seat_no}}" />
+                    <select id="seat{{@index}}" name="seat" class="boarding-point">
+                        {{#each this.stops_available}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                    <select class="destination-point" name="destination">
+                         {{#each this.stops_available}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                   
+                </div>
+            {{/each}}
+            <button type="submit">Book Seat</button>
+        </form>
+    </div>
+
+    
+   
+</body>
+</html>

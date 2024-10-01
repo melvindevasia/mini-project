@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Details</title>
+        <link rel="stylesheet" href="/stylesheets/busstyle.css">
+
+</head>
+<body>
+    <div class="bus-details-container">
+        <div class="bus-card">
+            <h1 class="bus-name">{{bus.busname}}</h1>
+            <p class="bus-detail">Registration Number: <span>{{bus.busregno}}</span></p>
+            <p class="bus-detail">Bus ID: <span>{{bus.busid}}</span></p>
+            <p class="bus-detail">Bus Type: <span>{{bus.bustype}}</span></p>
+            <p class="bus-detail">Seats: <span>{{bus.seats}}</span></p>
+            <p class="bus-detail">Boarding Date: <span>{{bus.boardingdate}}</span></p>
+            <p class="bus-detail">Ending Date: <span>{{bus.endingdate}}</span></p>
+            
+            <p class="bus-detail">Fare: <span>{{bus.fare}}</span></p>
+            <div class="route-details">
+                <h2 class="route-title">Route Details</h2>
+                <p class="route-detail">Route Type: <span>Long Route</span></p>
+                <p class="route-detail">Source: <span>{{route.boardingPoint}}</span></p>
+                <p class="route-detail">Destination: <span>{{route.destinationPoint}}</span></p>
+                <p class="route-detail">Stops:</p>
+                <ul class="stops-list">
+                    {{#each route.stops}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+           <div>
+                                        <a href="/users/view-availableseats/?id={{bus._id}}" class="btn btn-primary">Book
+                                            Now</a>
+                                    </div>
+        </div>
+    </div>
+</body>
+</html>

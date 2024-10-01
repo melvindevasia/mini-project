@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .ticket-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .ticket-header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .ticket-details {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bus Ticket Details</h1>
+    
+    {{#each tickets}}
+    <div class="ticket-container">
+        <div class="ticket-header">
+            <h2>Ticket: {{this._id}}</h2>
+        </div>
+        <div class="ticket-details">
+            <p><strong>Seat No:</strong> {{this.seat_no}}</p>
+            <p><strong>Boarding Point:</strong> {{this.boarding_point}}</p>
+            <p><strong>Destination:</strong> {{this.destination}}</p>
+            <p><strong>Price:</strong> {{this.price}}</p>
+        </div>
+    </div>
+    {{/each}}
+    <div class="total-price">
+        <h3>Total Price: {{price}}</h3>
+    </div>
+</body>
+</html>

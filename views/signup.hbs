@@ -1,0 +1,79 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login-page</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    <div class="box-form">
+      <div class="left">
+        <style></style>
+      </div>
+      <div class="right">
+        <p style="color: black;">Already have an account?
+          <a href="/users/login">login here</a>
+          it takes less than a minute</p>
+        <form action="/users/signup" method="POST">
+          <div class="input">
+
+            <div class="field">
+              <input
+                id="email"
+                name="username"
+                placeholder="username"
+                type="text"
+                required
+              />
+            </div>
+            <br />
+            <div class="field">
+              <input
+                id="email"
+                name="email"
+                placeholder="Email-id"
+                type="text"
+                required
+              />
+            </div>
+            <br />
+            <div class="field">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+          </div>
+          <br /><br />
+          <div class="remember-me--forget-password">
+            <label>
+              <input type="checkbox" name="rememberMe" checked />
+              <div class="text-checkbox">Remember me</div>
+            </label>
+            <p style="color: black;text-decoration:none"><a
+                href="http://127.0.0.1:5501/forgotpass.html"
+              >forgot password?</a></p>
+          </div>
+          <br />
+          {{!-- <button type="submit" id="btn" class="log">log-in</button> --}}
+          <button type="submit" id="btn" class="sig">Sign-up</button>
+        </form>
+
+        {{! <button type="submit" id="btn" class="sig">Sign-up</button> }}
+
+      </div>
+    </div>
+  </body>
+</html>
